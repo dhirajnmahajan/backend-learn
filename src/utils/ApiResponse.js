@@ -1,3 +1,5 @@
+// this is custom utilitu function to handle the api response
+
 class ApiResponse {
 
     constructor(statusCode, message = "success", data) {
