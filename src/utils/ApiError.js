@@ -1,3 +1,5 @@
+// this is custom utility function to handle the errors 
+
 class ApiError extends Error {
 
     constructor(statusCode, message = "something went Wrong", errors = [], stack = "") {
