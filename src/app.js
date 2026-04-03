@@ -20,4 +20,15 @@ app.use(express.static("public"))
 // cookie parser is used to access the cookies from user's browser and handle it securely through server
 app.use(cookieParser())
 
+// import routes 
+// (here we give this name userRouter as per our own)
+import userRouter from "./routes/user.routes.js"
+
+//  when someone goes on /users routes then they can directly navigate on user.routes.js file 
+// ( means control will go on userRouter => user.routes.js)
+
+// routes declaration
+// http://localhost:8000/api/v1/users
+app.use("/api/v1/users", userRouter);
+
 export default app;
