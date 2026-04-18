@@ -32,7 +32,7 @@ const verifyJWT = asyncHandler(async (req, _, next) => {
       throw new ApiError(401, "Invalid Access Token");
     }
     // LOGIC:
-    // here we are setting user to req.user , which can be accessible to the logoutUser function , because this middleware runs first
+    // here we are setting user to req.user , which can be accessible to the other's (next) functions , because this middleware runs first
     req.user = user;
     next();
   } catch (error) {
