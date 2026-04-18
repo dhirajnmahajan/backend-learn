@@ -1,22 +1,34 @@
 import { Router } from "express";
-import { registerUser } from "../controllers/user.controller.js";
+import {
+  loginUser,
+  logoutUser,
+  registerUser,
+} from "../controllers/user.controller.js";
 import { upload } from "../middlewares/multer.middleware.js";
+import { verifyJWT } from "../middlewares/auth.middleware.js";
 
 const router = Router();
 
 router.route("/register").post(
-    upload.fields([
-        {
-            name: 'avatar',
-            maxCount: 1
-        },
-        {
-            name: 'coverImage',
-            maxCount: 1
-        }
-    ]),
-    registerUser
+  upload.fields([
+    {
+      name: "avatar",
+      maxCount: 1,
+    },
+    {
+      name: "coverImage",
+      maxCount: 1,
+    },
+  ]),
+  registerUser
 );
-// router.route("/login").post(loginUser)
+router.route("/login").post(loginUser);
+
+// secured route
+// NOTE:
+//  Here middleware will execute first and then control goes to next(logoutUSer )
+//  In middleware we are setting the req.user = user
+// so in req of logoutUser (req,res), there is access of req.user with user information like id and token
+router.route("/logout").post(verifyJWT, logoutUser);
 
 export default router;
